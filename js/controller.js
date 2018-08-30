@@ -2,7 +2,6 @@ var gameState,
     controller = function () {
         var startGame = function () {
                 var initialNumberOfPieces = view.getInitialNumberOfPieces();
-
                 game.startGame({
                     numberOfPieces: initialNumberOfPieces
                 });
@@ -22,7 +21,7 @@ var gameState,
                 if (gameState === "nextLevel") {
                     startNextLevel(pieces.length);
                 }
-                if(gameState === "guessedPiece"){
+                if (gameState === "guessedPiece") {
                     view.greenPiece(pieceId);
                 }
             },
@@ -32,11 +31,20 @@ var gameState,
                     numberOfPieces: initialNumberOfPieces + 1
                 })
                 view.renderPieces(game.getPieces());
-            };
+            },
+        startGameOnLevel = function () {
+            var levelNumber = document.getElementById("levelNumberInput").value;
+            game.startGame({
+                numberOfPieces: levelNumber
+            });
+
+            view.renderPieces(game.getPieces());
+        };
 
         return {
             'startGame': startGame,
             'shootPiece': shootPiece,
-            'startNextLevel': startNextLevel
+            'startNextLevel': startNextLevel,
+            'startGameOnLevel': startGameOnLevel
         }
     }();

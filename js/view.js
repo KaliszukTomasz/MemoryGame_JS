@@ -22,6 +22,7 @@ var view = (function () {
                 if (pieces[i].toGuess) {
                     el.setAttribute("class", "lightPiece");
                 }
+                document.getElementById("levelNumberInput").value = pieces.length;
                 div = document.getElementById('rightsite');
                 div.appendChild(el);
 

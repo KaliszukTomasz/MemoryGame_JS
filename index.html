@@ -15,9 +15,11 @@
             <button onclick="controller.startGame()"> Highlight</button>
             <button onclick="controller.startNextLevel()"> Next Level</button>
 
+
         <!--<div><input type="number" /></div>-->
-        <div>Your current level</div>
-        <div><input id="levelNumber" type="number" value="4" min="4" max="100"/></div>
+        <div>Your current level:</div>
+        <div><input id="levelNumberInput" type="number" value="4"  min="4" max="100"/></div>
+        <button onclick="controller.startGameOnLevel()"> Start on this level </button>
 
     </div>
     <div id="rightsite">
