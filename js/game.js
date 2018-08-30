@@ -52,6 +52,8 @@ var game = (function () {
                 })
                 if (somePieceToGuess === false) {
                     return "nextLevel";
+                }else{
+                    return "guessedPiece";
                 }
             } else {
                 return "gameOver";

@@ -2,25 +2,68 @@ body {
     background-color: powderblue;
     margin: 0;
 }
+
 #bothsites {
     display: flex;
     justify-content: space-around;
 }
+
 #leftsite {
-    background: pink;
+    background: #f729ff;
     height: 200px;
     width: 50%;
+    display: inline-block;
+    justify-items: center;
 }
-#rightsite{
-    background: blue;
+
+#rightsite {
+    background: #fffd96;
     width: 50%;
     height: 200px;
 }
-span{
+
+button {
+    width: 100px;
+    height: 40px;
+}
+
+span.grayPiece {
     margin: 2px;
     display: inline-flex;
     width: 50px;
     height: 50px;
     border-radius: 5px;
-    background: red;
+    background: #808080;
 }
+
+span.lightPiece {
+    margin: 2px;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background: #2135ff;
+    pointer-events: none;
+}
+
+span.guessedPiece {
+    margin: 2px;
+    display: inline-flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    background: #00ff2a;
+    pointer-events: none;
+}
+
+input {
+    position: relative;
+    left: 10px;
+    top: 10px;
+    width: 50px;
+    height: 20px;
+    font-size: 14pt;
+}
+
+
+

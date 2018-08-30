@@ -13,22 +13,30 @@ var gameState,
             shootPiece = function (pieces, pieceId) {
                 gameState = game.shootPiece(pieces, pieceId);
                 if (gameState === "gameOver") {
+                    // view.greenPiece(pieceId);
+                    // setTimeout(1000);
                     game.startGame();
+                    // document.getElementById(pieceId).setAttribute("class", "lightPiece");
                     view.renderPieces(game.getPieces());
                 }
                 if (gameState === "nextLevel") {
                     startNextLevel(pieces.length);
                 }
+                if(gameState === "guessedPiece"){
+                    view.greenPiece(pieceId);
+                }
             },
-            startNextLevel = function (numberOfPieces) {
+            startNextLevel = function () {
+                var initialNumberOfPieces = view.getInitialNumberOfPieces();
                 game.startGame({
-                    numberOfPieces: numberOfPieces + 1
+                    numberOfPieces: initialNumberOfPieces + 1
                 })
                 view.renderPieces(game.getPieces());
             };
 
         return {
             'startGame': startGame,
-            'shootPiece': shootPiece
+            'shootPiece': shootPiece,
+            'startNextLevel': startNextLevel
         }
     }();

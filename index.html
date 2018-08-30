@@ -8,9 +8,18 @@
 </head>
 <body>
 <h1>MEMORY GAME</h1>
-<button onclick="controller.startGame()"> start game</button>
+
 <div id="bothsites">
-    <div id="leftsite"> pierwszy</div>
+    <div id="leftsite">
+
+            <button onclick="controller.startGame()"> Highlight</button>
+            <button onclick="controller.startNextLevel()"> Next Level</button>
+
+        <!--<div><input type="number" /></div>-->
+        <div>Your current level</div>
+        <div><input id="levelNumber" type="number" value="4" min="4" max="100"/></div>
+
+    </div>
     <div id="rightsite">
         <span></span>
 

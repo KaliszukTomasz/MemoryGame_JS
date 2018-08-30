@@ -144,37 +144,52 @@ describe('Game', function () {
         expect(gameState).toBe("nextLevel");
     });
 
-
-
-
-    it ('should shoot one2 pieces what is not to guess and throw game over', function () {
+    it('should shoot one piece to guess on start when start 6 pieces and return guessedPiece', function () {
         var
-            tableIndexesPiecesToGuess,
-            config = {
-                numberOfPieces: 8
-            },
+            indexPieceToGuess,
             gameState,
+            config = {
+                numberOfPieces: 6
+            },
             pieces;
+
         game.startGame(config);
         pieces = game.getPieces();
-        tableIndexesPiecesToGuess = pieces.findIndex(function (element) {
-            return element.toGuess === true && element.guessed === false;
-        })
-        if(tableIndexesPiecesToGuess ==0){
-            tableIndexesPiecesToGuess+=2;}
-        gameState = game.shootPiece(pieces, tableIndexesPiecesToGuess-1);
+        // piecesToGuess = findPiecesToGuess(game.getPieces());
+        indexPieceToGuess = pieces.findIndex(function (element) {
+            return (element.toGuess === true && element.guessed === false);
+        });
 
-        // expect(gameState).toBe("gameOver");
-        expect(gameState).toBe("gameOver");
-    }) ;
-
-
-
-
-    function findPiecesToGuess(pieces) {
-    return pieces.filter(function (piece) {
-        return piece.toGuess;
+        gameState = game.shootPiece(pieces, indexPieceToGuess);
+        // expect(piecesToGuess.length).toBe(1);
+        expect(gameState).toBe("guessedPiece");
     });
-}
-})
-;
+
+
+        it('should shoot one2 pieces what is not to guess and throw game over', function () {
+            var
+                tableIndexesPiecesToGuess,
+                gameState,
+                pieces;
+            game.startGame();
+            pieces = game.getPieces();
+            tableIndexesPiecesToGuess = pieces.findIndex(function (element) {
+                return element.toGuess === true && element.guessed === false;
+            })
+            if (tableIndexesPiecesToGuess == 0) {
+                tableIndexesPiecesToGuess += 2;
+            }
+            gameState = game.shootPiece(pieces, tableIndexesPiecesToGuess - 1);
+
+            // expect(gameState).toBe("gameOver");
+            expect(gameState).toBe("gameOver");
+        });
+
+
+        function findPiecesToGuess(pieces) {
+            return pieces.filter(function (piece) {
+                return piece.toGuess;
+            });
+        }
+    })
+    ;
