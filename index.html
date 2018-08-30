@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>JSTK Memory game</title>
+    <title>Memory game</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>JSTK MEMORY GAME</h1>
-<button> start game</button>
-<!--node modules-->
+<h1>MEMORY GAME</h1>
+<button onclick="controller.startGame()"> start game</button>
+<div id="bothsites">
+    <div id="leftsite"> pierwszy</div>
+    <div id="rightsite">
+        <span></span>
+
+    </div>
+</div><!--node modules-->
+
+
 <script src="js/game.js"></script>
 <script src="js/view.js"></script>
 <script src="js/controller.js"></script>
