@@ -23,6 +23,7 @@ var view = (function () {
                     el.setAttribute("class", "lightPiece");
                 }
                 document.getElementById("levelNumberInput").value = pieces.length;
+                document.getElementById("numberPiecesToGuess").innerText= Math.floor(pieces.length/2-1);
                 div = document.getElementById('rightsite');
                 div.appendChild(el);
 
@@ -34,7 +35,7 @@ var view = (function () {
                     elements[i].setAttribute("class", "grayPiece");
                 }
 
-            }, 1000);
+            }, document.getElementById("lightPiecesDuration").value*1000);
         },
         clearWindow = function () {
             const div = document.getElementById('rightsite');
@@ -42,17 +43,31 @@ var view = (function () {
                 div.removeChild(div.firstChild);
             }
         },
+
         greenPiece = function (pieceId) {
-             document.getElementById(pieceId).setAttribute("class", "guessedPiece");
+            document.getElementById(pieceId).setAttribute("class", "guessedPiece");
+        },
 
+        redPiece = function (pieceId) {
+            document.getElementById(pieceId).setAttribute("class", "failShootedPiece");
+        },
+
+        bluePieces = function (pieces) {
+            var i;
+            for (i = 0; i < pieces.length; i++) {
+                if (pieces[i].toGuess === true) {
+                    document.getElementById(i).setAttribute("class", "lightPiece");
+                }
+            }
         }
-
 
     ;
 
     return {
         'getInitialNumberOfPieces': getInitialNumberOfPieces,
         'renderPieces': renderPieces,
-        'greenPiece': greenPiece
+        'greenPiece': greenPiece,
+        'redPiece': redPiece,
+        'bluePieces': bluePieces
     }
 })();

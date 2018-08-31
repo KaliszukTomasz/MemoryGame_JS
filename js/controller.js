@@ -14,12 +14,18 @@ var gameState,
                 if (gameState === "gameOver") {
                     // view.greenPiece(pieceId);
                     // setTimeout(1000);
-                    game.startGame();
-                    // document.getElementById(pieceId).setAttribute("class", "lightPiece");
-                    view.renderPieces(game.getPieces());
+                    view.redPiece(pieceId);
+                    view.bluePieces(pieces);
+                    setTimeout(function () {
+                        game.startGame();
+                        view.renderPieces(game.getPieces());
+                    }, 1000);
                 }
                 if (gameState === "nextLevel") {
-                    startNextLevel(pieces.length);
+                    view.greenPiece(pieceId);
+                    setTimeout(function () {
+                        startNextLevel(pieces.length);
+                    }, 1000);
                 }
                 if (gameState === "guessedPiece") {
                     view.greenPiece(pieceId);
@@ -27,19 +33,22 @@ var gameState,
             },
             startNextLevel = function () {
                 var initialNumberOfPieces = view.getInitialNumberOfPieces();
+                if(initialNumberOfPieces<4){
+                    initialNumberOfPieces = 3;
+                }
                 game.startGame({
                     numberOfPieces: initialNumberOfPieces + 1
                 })
                 view.renderPieces(game.getPieces());
             },
-        startGameOnLevel = function () {
-            var levelNumber = document.getElementById("levelNumberInput").value;
-            game.startGame({
-                numberOfPieces: levelNumber
-            });
+            startGameOnLevel = function () {
+                var levelNumber = document.getElementById("levelNumberInput").value;
+                game.startGame({
+                    numberOfPieces: levelNumber
+                });
 
-            view.renderPieces(game.getPieces());
-        };
+                view.renderPieces(game.getPieces());
+            };
 
         return {
             'startGame': startGame,
