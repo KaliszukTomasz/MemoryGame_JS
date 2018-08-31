@@ -31,3 +31,13 @@ _ReSharper*/
 .vs/
 #Nuget packages folder
 packages/
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/base.css
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/index.html
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/js/controller.js.html
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/js/game.js.html
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/js/index.html
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/js/view.js.html
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/prettify.css
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/prettify.js
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/sort-arrow-sprite.png
+/coverage/Chrome 68.0.3440 (Windows 7 0.0.0)/sorter.js

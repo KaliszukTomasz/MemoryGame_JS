@@ -1,3 +1,4 @@
+'use strict';
 var game = (function () {
 
     var initialNumberOfPieces = 4,

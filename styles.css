@@ -3,33 +3,43 @@ body {
     margin: 0;
 }
 
-#leftsite :hover{
+.headTitle {
+    text-align: center;
+}
+#leftPanel :hover{
     opacity: 0.8;
 }
 
-#bothsites {
+#bothPanels {
     display: flex;
     justify-content: space-around;
+    overflow: auto;
+
 }
 
-#leftsite {
-    background: #f729ff;
-    height: 200px;
-    width: 50%;
+#leftPanel {
+    background: #c25fff;
+    height: 300px;
+    width: 40%;
     display: inline-block;
     justify-items: center;
+    border-radius: 10px;
 }
 
-#rightsite {
+#rightPanel {
     background: #fffd96;
-    width: 50%;
-    height: 200px;
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
 }
 
 button {
     margin-left: 10px;
     width: 100px;
     height: 40px;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #fffee0;
 }
 
 span.grayPiece {
@@ -78,14 +88,20 @@ span.failShootedPiece {
 input {
     position: relative;
     left: 10px;
-    /*top: 10px;*/
+    top: 10px;
     width: 50px;
     height: 20px;
     font-size: 14pt;
 }
 
-textLines {
-    display: inline;
+.textLines {
+    display: inline-block;
+    text-wrap: inherit;
+    margin-top: 4px;
+}
+
+.disable {
+    pointer-events: none;
 }
 
 

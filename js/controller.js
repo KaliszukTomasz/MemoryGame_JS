@@ -1,3 +1,4 @@
+'use strict';
 var gameState,
     controller = function () {
         var startGame = function () {
@@ -7,24 +8,26 @@ var gameState,
                 });
 
                 view.renderPieces(game.getPieces());
-
+6
             },
             shootPiece = function (pieces, pieceId) {
                 gameState = game.shootPiece(pieces, pieceId);
                 if (gameState === "gameOver") {
-                    // view.greenPiece(pieceId);
-                    // setTimeout(1000);
                     view.redPiece(pieceId);
                     view.bluePieces(pieces);
+                    view.disablePieces();
                     setTimeout(function () {
                         game.startGame();
                         view.renderPieces(game.getPieces());
+                        view.enablePieces();
                     }, 1000);
                 }
                 if (gameState === "nextLevel") {
                     view.greenPiece(pieceId);
+                    view.disablePieces();
                     setTimeout(function () {
                         startNextLevel(pieces.length);
+                        view.enablePieces();
                     }, 1000);
                 }
                 if (gameState === "guessedPiece") {

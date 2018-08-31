@@ -1,3 +1,4 @@
+'use strict';
 var view = (function () {
     var getInitialNumberOfPieces = function () {
             return game.getPieces().length;
@@ -14,31 +15,31 @@ var view = (function () {
                 el.setAttribute("id", i);
                 el.setAttribute("class", "grayPiece")
                 el.onclick = function () {
-                    // debugger;
                     controller.shootPiece(pieces, parseInt(this.getAttribute("id")));
-                    // alert("Hello! I am an alert box!! " + this.getAttribute("id"));
-
                 };
+                el.classList.add("disable");
                 if (pieces[i].toGuess) {
                     el.setAttribute("class", "lightPiece");
                 }
-                document.getElementById("levelNumberInput").value = pieces.length;
-                document.getElementById("numberPiecesToGuess").innerText= Math.floor(pieces.length/2-1);
-                div = document.getElementById('rightsite');
+                document.getElementById("levelNumberInput").value = getCurrentNumberOfPieces(pieces);
+                document.getElementById("currentLevel").innerText = getCurrentNumberOfPieces(pieces);
+                document.getElementById("numberPiecesToGuess").innerText = Math.floor(pieces.length / 2 - 1);
+                div = document.getElementById('rightPanel');
                 div.appendChild(el);
-
-
             }
+
             setTimeout(function () {
-                elements = document.getElementById("rightsite").children;
+                elements = document.getElementById("rightPanel").children;
                 for (i = 0; i < elements.length; i++) {
                     elements[i].setAttribute("class", "grayPiece");
+                    elements[i].classList.remove("disable");
                 }
 
-            }, document.getElementById("lightPiecesDuration").value*1000);
+
+            }, document.getElementById("lightPiecesDuration").value * 1000);
         },
         clearWindow = function () {
-            const div = document.getElementById('rightsite');
+            const div = document.getElementById('rightPanel');
             while (div.firstChild) {
                 div.removeChild(div.firstChild);
             }
@@ -59,15 +60,27 @@ var view = (function () {
                     document.getElementById(i).setAttribute("class", "lightPiece");
                 }
             }
-        }
+        },
 
-    ;
+        disablePieces = function () {
+            document.getElementById("rightPanel").classList.add("disable");
+        },
+
+        enablePieces = function () {
+            document.getElementById("rightPanel").classList.remove("disable");
+        },
+
+        getCurrentNumberOfPieces = function (pieces) {
+            return pieces.length;
+        };
 
     return {
         'getInitialNumberOfPieces': getInitialNumberOfPieces,
         'renderPieces': renderPieces,
         'greenPiece': greenPiece,
         'redPiece': redPiece,
-        'bluePieces': bluePieces
+        'bluePieces': bluePieces,
+        'enablePieces': enablePieces,
+        'disablePieces': disablePieces
     }
 })();
