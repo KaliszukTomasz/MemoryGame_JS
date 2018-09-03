@@ -73,7 +73,6 @@ span.guessedPiece {
     height: 50px;
     border-radius: 5px;
     background: #00ff2a;
-    pointer-events: none;
 }
 
 span.failShootedPiece {
