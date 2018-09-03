@@ -3,6 +3,9 @@ var game = (function () {
 
     var initialNumberOfPieces = 4,
         currentNumberOfPieces,
+        positiveShoots = 0,
+        negativeShoots = 0,
+        numberOfLives = 1,
         startGame = function (config) {
             if (config && config.numberOfPieces) {
                 currentNumberOfPieces = config.numberOfPieces;
@@ -45,6 +48,8 @@ var game = (function () {
             var somePieceToGuess = false;
             if (pieces[pieceToShootId].toGuess === true && pieces[pieceToShootId].guessed === false) {
                 pieces[pieceToShootId].guessed = true;
+                positiveShoots++;
+
 
                 pieces.forEach(function (value) {
                     if (value.toGuess === true && value.guessed === false) {
@@ -53,18 +58,37 @@ var game = (function () {
                 })
                 if (somePieceToGuess === false) {
                     return "nextLevel";
-                }else{
+                } else {
                     return "guessedPiece";
                 }
             } else {
+                negativeShoots++;
                 return "gameOver";
             }
+        },
+
+        getPercentageResult = function () {
+            return (positiveShoots / (negativeShoots + positiveShoots));
+        },
+
+        clearPercentageResult = function () {
+            positiveShoots = 0;
+            negativeShoots = 0;
+        },
+
+        setNumberOfLives = function (value) {
+            numberOfLives = value;
+        },
+        getNumberOfLives = function () {
+            return numberOfLives;
         };
-
-
     return {
         'startGame': startGame,
         'getPieces': getPieces,
-        'shootPiece': shootPiece
+        'shootPiece': shootPiece,
+        'getPercentageResult': getPercentageResult,
+        'clearPercentageResult': clearPercentageResult,
+        'setNumberOfLives': setNumberOfLives,
+        'getNumberOfLives': getNumberOfLives
     }
 })();

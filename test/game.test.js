@@ -145,14 +145,14 @@ describe('Game', function () {
         game.startGame(config);
         pieces = game.getPieces();
         // when
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 2; i++) {
             tableIndexesPiecesToGuess = pieces.findIndex(function (element) {
                 return element.toGuess === true && element.guessed === false;
             });
             gameState = game.shootPiece(pieces, tableIndexesPiecesToGuess);
         }
         // then
-        expect(gameState).toBe("nextLevel");
+        expect(gameState).toBe("guessedPiece");
     });
 
     it('should shoot one piece to guess on start when start 6 pieces and return guessedPiece', function () {
@@ -164,7 +164,6 @@ describe('Game', function () {
                 numberOfPieces: 6
             },
             pieces;
-
         game.startGame(config);
         pieces = game.getPieces();
         indexPieceToGuess = pieces.findIndex(function (element) {
@@ -177,7 +176,7 @@ describe('Game', function () {
     });
 
 
-    it('should shoot one2 pieces what is not to guess and throw game over', function () {
+    it('should shoot one piece not to guess and throw game over', function () {
         // given
         var
             tableIndexesPiecesToGuess,
@@ -186,13 +185,10 @@ describe('Game', function () {
         game.startGame();
         pieces = game.getPieces();
         tableIndexesPiecesToGuess = pieces.findIndex(function (element) {
-            return element.toGuess === true && element.guessed === false;
+            return element.toGuess === false;
         })
-        if (tableIndexesPiecesToGuess == 0) {
-            tableIndexesPiecesToGuess += 2;
-        }
         // when
-        gameState = game.shootPiece(pieces, tableIndexesPiecesToGuess - 1);
+        gameState = game.shootPiece(pieces, tableIndexesPiecesToGuess);
         // then
         expect(gameState).toBe("gameOver");
     });
@@ -209,7 +205,70 @@ describe('Game', function () {
         // then
         expect(game.startGame).toHaveBeenCalledWith({numberOfPieces: 8});
         expect(view.renderPieces).toHaveBeenCalledWith(pieces);
-    })
+    });
+
+    it('should shoot one piece to guess and return 100% accuracy', function () {
+        // given
+        var
+            indexPieceToGuess,
+            percentageResult,
+            pieces;
+        game.startGame();
+        pieces = game.getPieces();
+        game.clearPercentageResult();
+        indexPieceToGuess = pieces.findIndex(function (element) {
+            return (element.toGuess === true && element.guessed === false);
+        });
+        // when
+        game.shootPiece(pieces, indexPieceToGuess);
+        percentageResult = game.getPercentageResult();
+        // then
+        expect(percentageResult * 100).toBe(100);
+    });
+
+    it('should shoot one piece not to guess and return 0% accuracy', function () {
+        // given
+        var indexPieceToGuess,
+            percentageResult,
+            pieces;
+        game.startGame();
+        pieces = game.getPieces();
+        game.clearPercentageResult();
+        indexPieceToGuess = pieces.findIndex(function (element) {
+            return (element.toGuess === false);
+        });
+        // when
+        game.shootPiece(pieces, indexPieceToGuess);
+        percentageResult = game.getPercentageResult();
+        // then
+        expect(percentageResult * 100).toBe(0);
+
+    });
+
+    it('should shoot one piece to guess and one not to guess and return 50% accuracy', function () {
+        // given
+        var indexPieceToGuess,
+            percentageResult,
+            pieces;
+        game.startGame();
+        pieces = game.getPieces();
+        game.clearPercentageResult();
+
+        // when
+        indexPieceToGuess = pieces.findIndex(function (element) {
+            return (element.toGuess === true);
+        });
+        game.shootPiece(pieces, indexPieceToGuess);
+
+        indexPieceToGuess = pieces.findIndex(function (element) {
+            return (element.toGuess === false);
+        });
+        game.shootPiece(pieces, indexPieceToGuess);
+        percentageResult = game.getPercentageResult();
+        // then
+        expect(percentageResult * 100).toBe(50);
+    });
+
 
     function findPiecesToGuess(pieces) {
         return pieces.filter(function (piece) {
@@ -218,6 +277,5 @@ describe('Game', function () {
     }
 });
 
-it('')
 
 

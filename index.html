@@ -15,16 +15,18 @@
 
             <button onclick="controller.startGame()"> Highlight</button>
             <button onclick="controller.startNextLevel()"> Next Level</button>
-
-
+<br>
         <!--<div><input type="number" /></div>-->
         <div class="textLines">Your current level:</div>
-        <div class="textLines" id="currentLevel">Start game, to see Your level!</div>
+        <div class="textLines" id="currentLevel">Start game, to see Your level!</div><br>
+        <div class="textLines">Number of lives left: </div>
+        <div class="textLines" id="numberOfLivesField">Start game, to see Your lives!</div>
+
 
         <div>
         <button onclick="controller.startGameOnLevel()"> Start level number: </button>
         <input class="quantity" id="levelNumberInput" type="number" value="4"  min="4" max="100"/>
-        </div><br><br>
+        </div><br>
 
         <div class="textLines">Current number of pieces to guess:</div>
         <div class="textLines" id="numberPiecesToGuess"> 0</div><br>
@@ -33,7 +35,12 @@
         <div class="textLines"><input id="lightPiecesDuration" type="number" value="1"  min="1" max="100"/></div>
 
         <h4>Stats:</h4>
-        <div id="percentageStats"></div>
+        <div class="textLines">Your percentage accuracy: </div>
+        <div id="percentageStats" class="textLines">0%</div>
+        <div>
+            <button onclick="controller.setNumberOfLives()"> Set number of lives </button>
+            <input class="quantity" id="numberOfLivesInput" type="number" value="1"  min="1" max="100"/>
+        </div>
     </div>
     <div id="rightPanel">
         <span></span>

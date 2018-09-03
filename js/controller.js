@@ -1,5 +1,6 @@
 'use strict';
 var gameState,
+    config,
     controller = function () {
         var startGame = function () {
                 var initialNumberOfPieces = view.getInitialNumberOfPieces();
@@ -8,7 +9,7 @@ var gameState,
                 });
 
                 view.renderPieces(game.getPieces());
-6
+                6
             },
             shootPiece = function (pieces, pieceId) {
                 gameState = game.shootPiece(pieces, pieceId);
@@ -17,7 +18,12 @@ var gameState,
                     view.bluePieces(pieces);
                     view.disablePieces();
                     setTimeout(function () {
-                        game.startGame();
+                        if (game.getNumberOfLives() > 1) {
+                            game.startGame(config = {numberOfPieces: pieces.length});
+                            game.setNumberOfLives(game.getNumberOfLives()-1);
+                        } else {
+                            game.startGame();
+                        }
                         view.renderPieces(game.getPieces());
                         view.enablePieces();
                     }, 1000);
@@ -36,7 +42,7 @@ var gameState,
             },
             startNextLevel = function () {
                 var initialNumberOfPieces = view.getInitialNumberOfPieces();
-                if(initialNumberOfPieces<4){
+                if (initialNumberOfPieces < 4) {
                     initialNumberOfPieces = 3;
                 }
                 game.startGame({
@@ -51,12 +57,17 @@ var gameState,
                 });
 
                 view.renderPieces(game.getPieces());
+            },
+            setNumberOfLives = function () {
+                game.setNumberOfLives(document.getElementById("numberOfLivesInput").value);
+                document.getElementById("numberOfLivesField").innerHTML = game.getNumberOfLives();
             };
 
         return {
             'startGame': startGame,
             'shootPiece': shootPiece,
             'startNextLevel': startNextLevel,
-            'startGameOnLevel': startGameOnLevel
+            'startGameOnLevel': startGameOnLevel,
+            'setNumberOfLives': setNumberOfLives
         }
     }();

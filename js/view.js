@@ -6,37 +6,49 @@ var view = (function () {
 
         renderPieces = function (pieces) {
             var i,
-                el,
+                piece,
                 div,
                 elements;
             clearWindow();
             for (i = 0; i < pieces.length; i++) {
-                el = document.createElement("SPAN");
-                el.setAttribute("id", i);
-                el.setAttribute("class", "grayPiece")
-                el.onclick = function () {
-                    controller.shootPiece(pieces, parseInt(this.getAttribute("id")));
-                };
-                el.classList.add("disable");
-                if (pieces[i].toGuess) {
-                    el.setAttribute("class", "lightPiece");
-                }
-                document.getElementById("levelNumberInput").value = getCurrentNumberOfPieces(pieces);
-                document.getElementById("currentLevel").innerText = getCurrentNumberOfPieces(pieces);
-                document.getElementById("numberPiecesToGuess").innerText = Math.floor(pieces.length / 2 - 1);
+                piece = createPiece(i, pieces);
                 div = document.getElementById('rightPanel');
-                div.appendChild(el);
+                div.appendChild(piece);
             }
-
+            refreshView(pieces);
             setTimeout(function () {
                 elements = document.getElementById("rightPanel").children;
                 for (i = 0; i < elements.length; i++) {
                     elements[i].setAttribute("class", "grayPiece");
                     elements[i].classList.remove("disable");
                 }
-
-
             }, document.getElementById("lightPiecesDuration").value * 1000);
+        },
+        createPiece = function (i, pieces) {
+            var piece;
+            piece = document.createElement("SPAN");
+            piece.setAttribute("id", i);
+            piece.setAttribute("class", "grayPiece")
+            piece.onclick = function () {
+                controller.shootPiece(pieces, parseInt(this.getAttribute("id")));
+            };
+            piece.classList.add("disable");
+            if (pieces[i].toGuess) {
+                piece.setAttribute("class", "lightPiece");
+            }
+            return piece;
+        },
+        refreshView = function (pieces) {
+            var percentageResult;
+            document.getElementById("levelNumberInput").value = getCurrentNumberOfPieces(pieces);
+            document.getElementById("currentLevel").innerText = getCurrentNumberOfPieces(pieces);
+            document.getElementById("numberPiecesToGuess").innerText = Math.floor(pieces.length / 2 - 1);
+            document.getElementById("numberOfLivesField").innerHTML = game.getNumberOfLives();
+            percentageResult = game.getPercentageResult() * 10000 / 100;
+            if (isNaN(percentageResult)) {
+                percentageResult = 0;
+            }
+            document.getElementById("percentageStats").innerHTML = Math.round(percentageResult) + "%";
         },
         clearWindow = function () {
             const div = document.getElementById('rightPanel');

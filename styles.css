@@ -6,7 +6,8 @@ body {
 .headTitle {
     text-align: center;
 }
-#leftPanel :hover{
+
+#leftPanel :hover {
     opacity: 0.8;
 }
 
@@ -19,8 +20,8 @@ body {
 
 #leftPanel {
     background: #c25fff;
-    height: 300px;
-    width: 40%;
+    height: 340px;
+    width: 45%;
     display: inline-block;
     justify-items: center;
     border-radius: 10px;
@@ -28,7 +29,7 @@ body {
 
 #rightPanel {
     background: #fffd96;
-    width: 60%;
+    width: 55%;
     height: auto;
     border-radius: 10px;
 }
@@ -51,7 +52,7 @@ span.grayPiece {
     background: #808080;
 }
 
-span.grayPiece:hover{
+span.grayPiece:hover {
     opacity: 0.5;
 }
 
@@ -102,6 +103,10 @@ input {
 
 .disable {
     pointer-events: none;
+}
+
+h4 {
+    -webkit-margin-after: 0px
 }
 
 
